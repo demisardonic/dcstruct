@@ -111,6 +111,15 @@ void *list_element(list_t *list, int index){
 	return get_node(list, index)->value;
 }
 
+
+void list_foreach(list_t *list, void (*fun)(const void *)){
+	list_node_t *node = list->head;
+	do{
+		fun(node->value);
+		node = node->next;
+	}while(node);
+}
+
 static list_node_t *get_node(list_t *list, int index){
 	list_node_t *node = NULL;
 	if(list && index >= 0 && index < list->size){

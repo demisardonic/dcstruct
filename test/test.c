@@ -10,7 +10,7 @@ int int_compare(const void *a, const void *b){
 	return (*(int *)a - *(int *)b);
 }
 void print(const void *a){
-	printf("%d\n", *(int *)a);
+	printf("%s\n", a);
 }
 
 void main(){
@@ -21,10 +21,10 @@ void main(){
   list_append(list, "test2");
   list_append(list, "test3");
   list_append(list, "test4");
+  
+  list_foreach(list, &print);
   list_remove_element(list, 3);
   list_remove_tail(list);
-  
-  printf("%s\n", list_tail(list));
   
   list_remove_element(list, 2);
   
@@ -67,10 +67,6 @@ void main(){
     
   bintree_iter_t *iter;
   bintree_iter_create(tree, &iter);
-  
-  while(bintree_iter_has_next(iter)){
-	  printf("%d\n", *(int *)bintree_iter_next(iter));
-  }
   
   bintree_iter_destroy(iter);
   

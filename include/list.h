@@ -26,4 +26,6 @@ void *list_head(list_t *);
 void *list_tail(list_t *);
 void *list_element(list_t *, int);
 
+void list_foreach(list_t *, void (*)(const void *));
+
 #endif

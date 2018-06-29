@@ -74,6 +74,14 @@ void *arraylist_get(arraylist_t *list, int index){
 	return list->data[index];
 }
 
+
+void arraylist_foreach(arraylist_t *list, void (*fun)(const void *)){
+	int i;
+	for(i = 0; i < list->size; i++){
+		fun(list->data[i]);
+	}
+}
+
 static void double_size(arraylist_t *list){
 	list->max *= 2;
 	void **new_data = (void **) realloc(list->data, sizeof(void *) * list->max);

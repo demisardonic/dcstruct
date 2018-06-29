@@ -21,4 +21,6 @@ void arraylist_clear(arraylist_t *);
 //getting
 void *arraylist_get(arraylist_t *, int);
 
+void arraylist_foreach(arraylist_t *, void (*)(const void *));
+
 #endif
