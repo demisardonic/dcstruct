@@ -9,6 +9,9 @@
 int int_compare(const void *a, const void *b){
 	return (*(int *)a - *(int *)b);
 }
+void print(const void *a){
+	printf("%d\n", *(int *)a);
+}
 
 void main(){
   list_t *list;
@@ -49,7 +52,27 @@ void main(){
   arraylist_create(&arraylist);
   arraylist_destroy(arraylist);
   
+  int a = 0;
+  int b = 1;
+  int c = 2;
+  int d = 3;
+  int e = 4;
   bintree_t *tree;
   bintree_create(&tree, int_compare);
+  bintree_add(tree, &e);
+  bintree_add(tree, &d);
+  bintree_add(tree, &c);
+  bintree_add(tree, &b);
+  bintree_add(tree, &a);
+    
+  bintree_iter_t *iter;
+  bintree_iter_create(tree, &iter);
+  
+  while(bintree_iter_has_next(iter)){
+	  printf("%d\n", *(int *)bintree_iter_next(iter));
+  }
+  
+  bintree_iter_destroy(iter);
+  
   bintree_destroy(tree);
 }
