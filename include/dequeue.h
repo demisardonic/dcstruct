@@ -5,7 +5,7 @@
 
 typedef struct dequeue dequeue_t;
 
-void dequeue_create(dequeue_t **);
+void dequeue_create(dequeue_t **, void (*)(void *));
 void dequeue_destroy(dequeue_t *);
 
 //info

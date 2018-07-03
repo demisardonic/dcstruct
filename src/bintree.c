@@ -7,7 +7,7 @@
 struct bintree {
   bintree_node_t *head;
   int size;
-  
+  void (*free)(void *);
   int (*cmp)(const void *, const void *);
 };
 
@@ -18,10 +18,11 @@ struct bintree_node{
   bintree_node_t *right;
 };
 
-void bintree_create(bintree_t **out, int (*cmp)(const void *, const void *)){
-	bintree_t *tree = (bintree_t *) calloc(1, sizeof(bintree_t));
-	tree->cmp = cmp;
-	*out = tree;
+void bintree_create(bintree_t **out, void (*free_fun)(void *), int (*cmp)(const void *, const void *)){
+  bintree_t *tree = (bintree_t *) calloc(1, sizeof(bintree_t));
+  tree->cmp = cmp;
+  tree->free = free_fun;
+  *out = tree;
 }
 
 void bintree_destroy(bintree_t *tree){
@@ -65,7 +66,7 @@ void bintree_add(bintree_t *tree, void *element){
 void bintree_foreach(bintree_t *tree, void (*fun)(const void *)){
 	bintree_node_t *cur = tree->head;
 	stack_t *stack;
-	stack_create(&stack);
+	stack_create(&stack, NULL);
 	while(stack_size(stack) > 0 || cur){
 		if(cur){
 			stack_push(stack, cur);

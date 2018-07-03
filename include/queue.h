@@ -5,7 +5,7 @@
 
 typedef struct queue queue_t;
 
-void queue_create(queue_t **);
+void queue_create(queue_t **, void (*)(void *));
 void queue_destroy(queue_t *);
 
 //info

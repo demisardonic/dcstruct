@@ -4,7 +4,7 @@
 typedef struct list list_t;
 typedef struct list_node list_node_t;
 
-void list_create(list_t **);
+void list_create(list_t **, void (*)(void *));
 void list_destroy(list_t *);
 
 //info
@@ -16,9 +16,9 @@ void list_prepend(list_t *, void *);
 void list_add(list_t *, void *, int);
 
 //removing
-void *list_remove_head(list_t *);
-void *list_remove_tail(list_t *);
-void *list_remove_element(list_t *, int);
+void list_remove_head(list_t *);
+void list_remove_tail(list_t *);
+void list_remove_element(list_t *, int);
 void list_clear(list_t *);
 
 //getting

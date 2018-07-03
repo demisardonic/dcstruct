@@ -7,10 +7,10 @@ struct queue {
   list_t *list;
 };
 
-void queue_create(queue_t **out){
+void queue_create(queue_t **out, void (*free_fun)(void *)){
 	queue_t *queue = (queue_t *)calloc(1, sizeof(queue_t));
 	list_t *list;
-	list_create(&list);
+	list_create(&list, free_fun);
 	queue->list = list;
 	*out = queue;
 }
@@ -35,7 +35,12 @@ void queue_offer(queue_t *queue, void *element){
 
 //removing
 void *queue_poll(queue_t *queue){
-	return (queue) ? list_remove_head(queue->list) : NULL;
+  void *data = NULL;
+  if(queue){
+    data = list_head(queue->list);
+    list_remove_head(queue->list);
+  }
+  return data;
 }
 
 void queue_clear(queue_t *queue){

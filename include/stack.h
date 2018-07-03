@@ -5,7 +5,7 @@
 
 typedef struct stack stack_t;
 
-void stack_create(stack_t **);
+void stack_create(stack_t **, void (*)(void *));
 void stack_destroy(stack_t *);
 
 //info

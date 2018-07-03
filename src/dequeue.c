@@ -7,10 +7,10 @@ struct dequeue {
   list_t *list;
 };
 
-void dequeue_create(dequeue_t **out){
+void dequeue_create(dequeue_t **out, void (*free_fun)(void *)){
 	dequeue_t *dequeue = (dequeue_t *)calloc(1, sizeof(dequeue_t));
 	list_t *list;
-	list_create(&list);
+	list_create(&list, free_fun);
 	dequeue->list = list;
 	*out = dequeue;
 }
@@ -40,16 +40,26 @@ void dequeue_offer_last(dequeue_t *dequeue, void *element){
 
 //removing
 void *dequeue_poll_first(dequeue_t *dequeue){
-	return (dequeue) ? list_remove_head(dequeue->list) : NULL;
+  void *data = NULL;
+  if(dequeue){
+    data = list_head(dequeue->list);
+    list_remove_head(dequeue->list);
+  }
+  return data;
 }
 
 void *dequeue_poll_last(dequeue_t *dequeue){
-	return (dequeue) ? list_remove_tail(dequeue->list) : NULL;
+  void *data = NULL;
+  if(dequeue){
+    data = list_tail(dequeue->list);
+    list_remove_tail(dequeue->list);
+  }
+  return data;
 }
 
 void dequeue_clear(dequeue_t *dequeue){
-	if(dequeue)
-		list_clear(dequeue->list);
+  if(dequeue)
+    list_clear(dequeue->list);
 }
 
 //getting

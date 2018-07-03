@@ -4,7 +4,7 @@
 typedef struct bintree bintree_t;
 typedef struct bintree_node bintree_node_t;
 
-void bintree_create(bintree_t **tree, int (*cmp)(const void *, const void *));
+void bintree_create(bintree_t **, void (*)(void *), int (*)(const void *, const void *));
 
 void bintree_destroy(bintree_t *);
 
@@ -12,7 +12,7 @@ int bintree_size(bintree_t *);
 
 void bintree_add(bintree_t *, void *);
 
-void bintree_foreach(bintree_t *tree, void (*)(const void *));
+void bintree_foreach(bintree_t *, void (*)(const void *));
 
 typedef struct bintree_iter bintree_iter_t;
 
